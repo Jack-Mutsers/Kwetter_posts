@@ -12,7 +12,7 @@ public class Helper {
         return value == null || value.isBlank();
     }
 
-    public static <T> Iterable<T> emptyIfNull(Iterable<T> iterable) {
+    public static <T> List<T> emptyIfNull(List<T> iterable) {
         return iterable == null ? List.of() : iterable;
     }
 }

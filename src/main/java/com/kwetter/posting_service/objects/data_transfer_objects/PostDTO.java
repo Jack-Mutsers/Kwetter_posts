@@ -6,14 +6,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
 public class PostDTO {
     private int id;
-    private UUID user_Id;
+    private String user_Id;
     private int group_Id;
+    private String message;
     private String creation_date;
     private List<Comment> comments;
 
@@ -22,6 +22,7 @@ public class PostDTO {
         this.user_Id = post.getWriter();
         this.group_Id = post.getGroupId();
         this.creation_date = post.getCreation_date();
+        this.message = post.getMessage();
     }
 
     public PostDTO(){}

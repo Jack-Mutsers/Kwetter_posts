@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +14,7 @@ import java.util.UUID;
 @Setter
 public class CommentDTO {
     private int id;
-    private UUID sender;
+    private String sender;
     private int post_id;
     private int comment_id;
     private String message;

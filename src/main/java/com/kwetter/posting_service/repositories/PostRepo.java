@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface PostRepo extends CrudRepository<Post, Integer>{
     Post findById(int id);
-    List<Post> findAllByWriter(UUID user_Id);
+    List<Post> findAllByWriter(String user_Id);
     List<Post> findAllByGroupId(int group_Id);
     void deleteById(int id);
 }
