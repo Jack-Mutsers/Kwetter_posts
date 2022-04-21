@@ -2,13 +2,16 @@ package com.kwetter.posting_service.controllers;
 
 import com.kwetter.posting_service.interfaces.ICommentService;
 import com.kwetter.posting_service.interfaces.IPostService;
+import com.kwetter.posting_service.interfaces.IUserService;
 import com.kwetter.posting_service.objects.data_transfer_objects.PostDTO;
 import com.kwetter.posting_service.objects.data_transfer_objects.PostForAlterationDTO;
+import com.kwetter.posting_service.objects.data_transfer_objects.UserDTO;
 import com.kwetter.posting_service.objects.exceptions.UnauthorizedException;
 import com.kwetter.posting_service.objects.models.Comment;
 import com.kwetter.posting_service.objects.models.Post;
 import com.kwetter.posting_service.services.CommentService;
 import com.kwetter.posting_service.services.PostService;
+import com.kwetter.posting_service.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +35,9 @@ public class PostController {
     @Autowired
     private final ICommentService commentService = new CommentService();
 
+    @Autowired
+    private final IUserService userService = new UserService();
+
     @GetMapping(path = "/get/{post_id}")
     public @ResponseBody ResponseEntity<Object> getPost(HttpServletRequest request, @PathVariable int post_id){
         Post post = postService.getPost(post_id);
@@ -40,7 +46,14 @@ public class PostController {
             return new ResponseEntity<>("Requested post could not be found.", HttpStatus.NOT_FOUND);
         }
 
+        UserDTO user = userService.returnUser(post.getWriter());
+
+        if(user == null){
+            return new ResponseEntity<>("", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
         PostDTO postDTO = getPostDTO(post);
+        postDTO.setWriter(user);
 
         return new ResponseEntity<>(postDTO, HttpStatus.OK);
     }

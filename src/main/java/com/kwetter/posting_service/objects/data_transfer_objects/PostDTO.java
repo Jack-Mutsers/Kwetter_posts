@@ -15,6 +15,7 @@ public class PostDTO {
     private int group_Id;
     private String message;
     private String creation_date;
+    private UserDTO writer;
     private List<Comment> comments;
 
     public PostDTO(Post post) {

@@ -9,8 +9,6 @@ import com.kwetter.posting_service.repositories.PostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
 
@@ -67,4 +65,5 @@ public class PostService implements IPostService {
         Post updatedObject = postRepo.save(originalPost);
         return updatedObject;
     }
+
 }
